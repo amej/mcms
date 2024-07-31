@@ -19,44 +19,34 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/amej/mcms/pkg/metrics"
 	"github.com/spf13/cobra"
 )
 
+// alertCmd represents the alert command
+var alertCmd = &cobra.Command{
+	Use:   "alert",
+	Short: "A brief description of your command",
+	Long: `A longer description that spans multiple lines and likely contains examples
+and usage of using your command. For example:
+
+Cobra is a CLI library for Go that empowers applications.
+This application is a tool to generate the needed files
+to quickly create a Cobra application.`,
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println("alert called")
+	},
+}
+
 func init() {
-	rootCmd.AddCommand(metricsCmd)
+	rootCmd.AddCommand(alertCmd)
 
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// metricsCmd.PersistentFlags().String("foo", "", "A help for foo")
+	// alertCmd.PersistentFlags().String("foo", "", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// metricsCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-	metricsCmd.Flags().IntP("interval", "n", 10, "Specify update interval")
-
-}
-
-// metricsCmd represents the metrics command
-var metricsCmd = &cobra.Command{
-	Use:   "metrics",
-	Short: "Gather metrics",
-	Long: `Gathers metrics at pre-defined interval and stores it in a database.
-	Syntax:
-	mcms metrics -n, --interval seconds
-	For example:
-	mcms metrics -n 20
-	`,
-	Run: collectMetrics,
-}
-
-func collectMetrics(cmd *cobra.Command, args []string) {
-	interval, _ := cmd.Flags().GetInt("interval")
-
-	// Print the interval
-	fmt.Printf("Collecting metrics at interval of %d seconds\n", interval)
-	metrics.GatherUsage()
-
+	// alertCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
