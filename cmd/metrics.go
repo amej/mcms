@@ -57,6 +57,6 @@ func collectMetrics(cmd *cobra.Command, args []string) {
 
 	// Print the interval
 	fmt.Printf("Collecting metrics at interval of %d seconds\n", interval)
-	metrics.GatherUsage()
+	metrics.GatherUsage(interval)
 
 }
