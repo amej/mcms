@@ -16,7 +16,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 package main
 
-import "github.com/amej/mcms/cmd"
+import (
+	"github.com/amej/mcms/cmd"
+	// Null container
+	_ "github.com/amej/mcms/pkg/metrics"
+)
 
 func main() {
 	cmd.Execute()
