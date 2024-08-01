@@ -23,7 +23,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// apiCmd represents the api command
+// apiCmd represents the api command "mcms api"
 var apiCmd = &cobra.Command{
 	Use:   "api",
 	Short: "A brief description of your command",

@@ -135,7 +135,7 @@ func aggregateMetricsHandler(w http.ResponseWriter, r *http.Request) {
 // Start initializes the HTTP server and metrics endpoint.
 func Start(address string) {
 	http.HandleFunc("/metrics", metricsHandler)
-	//http.HandleFunc("/metrics/range", metricsInRangeHandler)
+	/* TODO: ttp.HandleFunc("/metrics/range", metricsInRangeHandler) */
 	http.HandleFunc("/metrics/aggregate", aggregateMetricsHandler)
 	if err := http.ListenAndServe(address, nil); err != nil {
 		panic(err) // TODO: Move to gin or other frameworks.
