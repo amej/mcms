@@ -25,15 +25,11 @@ import (
 // visualizeCmd represents the visualize command
 var visualizeCmd = &cobra.Command{
 	Use:   "visualize",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Run this command to setup local visualizer ( ASCII art ? ) ",
+	Long: `This is not a standalone utility. It relies upon successful metric collection by the 'mcms metrics' command.
++A future enhancement.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("visualize called")
+		fmt.Println("visualize called.Waiting for implementation...")
 	},
 }
 

@@ -25,15 +25,11 @@ import (
 // alertCmd represents the alert command
 var alertCmd = &cobra.Command{
 	Use:   "alert",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Run this command to setup alerting mechanism and pass params",
+	Long: `This is not a standalone utility. It relies upon successful metric collection by the 'mcms metrics' command.
+A future enhancement.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("alert called")
+		fmt.Println("alert called. Awaiting...")
 	},
 }
 

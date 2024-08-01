@@ -14,24 +14,13 @@ func SaveMetricsToFile(metric Metric) {
 	store.Lock()
 	defer store.Unlock()
 
-	file, err := os.OpenFile("metrics.json", os.O_CREATE, 0644)
+	file, err := os.OpenFile("metrics.json", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		log.Printf("Error creating/appending/readonly metrics.json file: %v", err)
 		return
 	}
 	defer file.Close()
 
-	// Create a struct to wrap the metrics in an array
-	metricsResponse := struct {
-		Metrics []Metric `json:"metrics"`
-	}{
-		Metrics: store.metrics,
-	}
-
 	encoder := json.NewEncoder(file)
-	encoder.SetIndent("", "  ")
-
-	if err := encoder.Encode(metricsResponse); err != nil {
-		log.Printf("Error encoding metrics to JSON: %v", err)
-	}
+	encoder.Encode(metric)
 }
