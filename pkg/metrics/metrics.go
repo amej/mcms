@@ -54,18 +54,25 @@ func GatherUsage(interval int) {
 		}
 		// Add the metric to the global store
 		store.Lock()
-		store.metrics = append(store.metrics, metric)
-		store.Unlock()
+		func() {
+			defer store.Unlock() // Ensure unlock happens at the end of this function
+
+			// Add the metric to the global store
+			store.metrics = append(store.metrics, metric)
+
+			metricJSON, err := json.Marshal(metric)
+			if err != nil {
+				log.Printf("Error marshalling metric to JSON: %v", err)
+				return
+			}
+
+			fmt.Println(string(metricJSON))
+			go SaveMetricsToFile(metric)
+
+		}()
 
 		// Marshall metric to json
-		metricJSON, err := json.Marshal(metric)
-		if err != nil {
-			log.Printf("Error marshalling metric to JSON: %v", err)
-			continue
-		}
 
-		fmt.Println(string(metricJSON))
-		go SaveMetricsToFile(metric)
 		time.Sleep(time.Duration(interval) * time.Second)
 	}
 }
