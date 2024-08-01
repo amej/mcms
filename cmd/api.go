@@ -19,6 +19,7 @@ package cmd
 import (
 	"fmt"
 
+	server "github.com/amej/mcms/pkg"
 	"github.com/spf13/cobra"
 )
 
@@ -32,9 +33,7 @@ and usage of using your command. For example:
 Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("api called")
-	},
+	Run: implementAPI,
 }
 
 func init() {
@@ -49,4 +48,12 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// apiCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	apiCmd.Flags().StringP("address", "p", "localhost:1983", "Specify listening port")
+
+}
+func implementAPI(cmd *cobra.Command, args []string) {
+	address, _ := cmd.Flags().GetString("address")
+
+	fmt.Printf("api called %v", address)
+	server.Start(address)
 }

@@ -65,7 +65,7 @@ func GatherUsage(interval int) {
 		}
 
 		fmt.Println(string(metricJSON))
-		SaveMetricsToFile(metric)
+		go SaveMetricsToFile(metric)
 		time.Sleep(time.Duration(interval) * time.Second)
 	}
 }
